@@ -12,6 +12,9 @@
 		E3C4EBDF22D9052B0019057A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C4EBDD22D9052B0019057A /* Main.storyboard */; };
 		E3C4EBE122D9052D0019057A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3C4EBE022D9052D0019057A /* Assets.xcassets */; };
 		E3C4EBE422D9052D0019057A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C4EBE222D9052D0019057A /* LaunchScreen.storyboard */; };
+		E3C4EBEE22D907B10019057A /* PlayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C4EBED22D907B10019057A /* PlayCard.swift */; };
+		E3C4EBF022D913E70019057A /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C4EBEF22D913E70019057A /* PlayingCardDeck.swift */; };
+		E3C4EBF222D91B170019057A /* PlayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C4EBF122D91B170019057A /* PlayCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		E3C4EBE022D9052D0019057A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3C4EBE322D9052D0019057A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3C4EBE522D9052D0019057A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3C4EBED22D907B10019057A /* PlayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCard.swift; sourceTree = "<group>"; };
+		E3C4EBEF22D913E70019057A /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
+		E3C4EBF122D91B170019057A /* PlayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 			children = (
 				E3C4EBD922D9052B0019057A /* AppDelegate.swift */,
 				E3C4EBDB22D9052B0019057A /* ViewController.swift */,
+				E3C4EBED22D907B10019057A /* PlayCard.swift */,
+				E3C4EBEF22D913E70019057A /* PlayingCardDeck.swift */,
+				E3C4EBF122D91B170019057A /* PlayCardView.swift */,
 				E3C4EBDD22D9052B0019057A /* Main.storyboard */,
 				E3C4EBE022D9052D0019057A /* Assets.xcassets */,
 				E3C4EBE222D9052D0019057A /* LaunchScreen.storyboard */,
@@ -135,7 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3C4EBEE22D907B10019057A /* PlayCard.swift in Sources */,
+				E3C4EBF022D913E70019057A /* PlayingCardDeck.swift in Sources */,
 				E3C4EBDC22D9052B0019057A /* ViewController.swift in Sources */,
+				E3C4EBF222D91B170019057A /* PlayCardView.swift in Sources */,
 				E3C4EBDA22D9052B0019057A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
