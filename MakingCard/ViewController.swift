@@ -14,9 +14,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var playCardView: PlayCardView!{
         didSet{
-            let swipe = UISwipeGestureRecognizer (target: self, action: #selector(nextCard))
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(nextCard))
             swipe.direction = [.left, .right]
             playCardView.addGestureRecognizer(swipe)
+            let pinch = UIPinchGestureRecognizer(target: playCardView, action: #selector(PlayCardView.adjustFaceCardScale(byHandlingGestureRecognizedBy:)))
+            playCardView.addGestureRecognizer(pinch)
         }
     }
     
@@ -27,6 +29,9 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
+        playCardView.isfacedUp = !playCardView.isfacedUp
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

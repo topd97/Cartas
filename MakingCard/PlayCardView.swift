@@ -12,7 +12,7 @@ import UIKit
 class PlayCardView: UIView {
     
     @IBInspectable
-    var rank: Int = 5 { didSet { setNeedsDisplay(); setNeedsLayout()}}
+    var rank: Int = 1 { didSet { setNeedsDisplay(); setNeedsLayout()}}
     @IBInspectable
     var suit: String = "♠️" { didSet { setNeedsDisplay(); setNeedsLayout()}}
     @IBInspectable
@@ -26,14 +26,20 @@ class PlayCardView: UIView {
     private lazy var upperLeftCornerLabel = createLabel()
     private lazy var lowerRightCornerLabel = createLabel()
     
-    private lazy var labelsArray = [UILabel]()
-    
-    func initLabelsArray() -> [UILabel]{
-        var labelsArray = [UILabel]()
-        for i in 0...9{
-            labelsArray.append(createLabel())
+    var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize {
+        didSet{
+            setNeedsDisplay()
         }
-        return labelsArray
+    }
+    
+    @objc func adjustFaceCardScale(byHandlingGestureRecognizedBy recognizer: UIPinchGestureRecognizer){
+        switch recognizer.state {
+        case .changed, .ended:
+            faceCardScale *= recognizer.scale
+            recognizer.scale = 1.0
+        default:
+            break
+        }
     }
     
     private func createLabel() -> UILabel{
@@ -75,38 +81,38 @@ class PlayCardView: UIView {
         lowerRightCornerLabel.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi)
     }
     
+    func getStringHeight(_ string: NSAttributedString) -> CGFloat{
+        let constraintRect = CGSize(width: frame.width, height: .greatestFiniteMagnitude)
+        let boundingBox = string.boundingRect(with: constraintRect,
+                                            options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                            context: nil)
+        return boundingBox.height
+    }
+    
     func drawPips(){
         let pipsPerRow = [[0],[1],[1,1],[1,1,1],[2,2],[2,1,2],[2,2,2],[2,1,2,2],[2,2,2,2],[2,2,1,2,2],[2,2,2,2,2]]
         
-        let frame = bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize)
+        let frame = bounds.zoom(by: faceCardScale)
         
         let formation = pipsPerRow[rank]
         let rowCount = formation.count
         let rowHeight:CGFloat = frame.height / CGFloat(rowCount)
         var actualY: CGFloat = CGFloat(0)
-        var labelCount = 0
-        self.labelsArray = [UILabel]()
-        self.labelsArray = self.initLabelsArray()
-        print(self.labelsArray)
         
         for quant in formation{
             let pips = centeredAttributedString(suit, fontSize: cornerFontSize)
+            let stringHeight = getStringHeight(pips)
+            let centerY = (rowHeight - stringHeight)/2
             
             switch quant{
             case 1:
-                configureGeneralLabel(labelsArray[labelCount], text: pips, isFacedUp: self.isfacedUp)
-                labelsArray[labelCount].center = frame.origin.offsetBy(dx: frame.width/2, dy: actualY + rowHeight/2)
-                labelCount += 1
+                let rectToLabel = CGRect(x: frame.minX, y: frame.minY + centerY + actualY, width: frame.width, height: stringHeight)
+                pips.draw(in: rectToLabel)
             case 2:
-                for i in [0,1]{
-                    configureGeneralLabel(labelsArray[labelCount], text: pips, isFacedUp: self.isfacedUp)
-                    if i == 0{
-                        labelsArray[labelCount].center = frame.origin.offsetBy(dx: frame.width/4, dy: actualY + rowHeight/2)
-                    } else{
-                        labelsArray[labelCount].center = frame.origin.offsetBy(dx: 3 * (frame.width/4), dy: actualY + rowHeight/2)
-                    }
-                    labelCount += 1
-                }
+                let rectToLabelLeft = CGRect(x: frame.minX, y: frame.minY + centerY + actualY, width: frame.width/2, height: stringHeight)
+                let rectToLabelRight = CGRect(x: frame.minX + frame.width/2 , y: frame.minY + centerY + actualY, width: frame.width/2, height: stringHeight)
+                pips.draw(in: rectToLabelLeft)
+                pips.draw(in: rectToLabelRight)
             default:
                 return
             }
@@ -122,7 +128,7 @@ class PlayCardView: UIView {
         roundedRect.fill()
         if isfacedUp{
             if rank>10{
-                UIImage(named:"faces", in: Bundle(for: self.classForCoder), compatibleWith: traitCollection)?.draw(in: bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+                UIImage(named:"faces", in: Bundle(for: self.classForCoder), compatibleWith: traitCollection)?.draw(in: bounds.zoom(by: faceCardScale))
                 
             } else{
                 drawPips()

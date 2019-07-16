@@ -27,12 +27,13 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rank">
-                                        <integer key="value" value="3"/>
+                                        <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99942404029999998" green="0.78996860015895665" blue="0.40104881242665669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="XKg-CO-LEw" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="JRT-XD-gnC"/>
                             <constraint firstItem="XKg-CO-LEw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Q8g-ha-J16"/>
@@ -42,13 +43,22 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XKg-CO-LEw" secondAttribute="trailing" constant="16" id="yRK-il-PIX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="oL8-Qd-mLu" appends="YES" id="RTu-jw-ZrN"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="playCardView" destination="XKg-CO-LEw" id="NgC-55-ajQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="oL8-Qd-mLu">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="chV-wX-DHU"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
     </scenes>
 </document>
